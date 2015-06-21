@@ -1,4 +1,4 @@
-#!/bin/bash
+#!bin/bash
 wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
 sudo dpkg -i puppetlabs-release-precise.deb
 sudo apt-get update
@@ -11,6 +11,7 @@ cat << EOF >> /etc/puppet/puppet.conf
     pluginsync    = true
     masterport    = 8140
     environment   = production
+    certname      = $CERT_NAME
     server        = $PUPPET_MASTER
     listen        = false
     splay         = false
@@ -21,4 +22,3 @@ EOF
 
 /etc/init.d/puppet restart
 sudo puppet agent -t
-
